@@ -90,7 +90,8 @@
     socket.on('newTweet', function (tweet) {
       // alert('Refreshing...check the console...')
       let newEl = document.createElement('DIV');
-      newEl.innerHTML = '<div class = "tweetbox">  <li><img>'+tweet.name+'</li>  <li>'+tweet.text+'</li>  </div>'
+      newEl.innerHTML = '<div class = "tweetbox">  <li><img><a href=/users/'+tweet.name+'>'+tweet.name+'</li>  <li>'+tweet.text+'</li>  </div>'
+
       // console.dir(newEl)
       let tweetbox = document.getElementById('listParent');
       tweetbox.appendChild(newEl)
