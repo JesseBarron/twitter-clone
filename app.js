@@ -1,25 +1,25 @@
 const express = require('express');
-const morgan = require('morgan');
-const nunjucks = require('nunjucks');
 const app = express();
-
-nunjucks.configure('./views/');
-nunjucks.render('index.html', { title: 'TEMPLATE', people: [ { name: 'Zachary' }, { name: 'Jesse' }, { name: 'Max' }]}, function (err, output) {
-  console.log(output);
-});
+const nunjucks = require('nunjucks');
+const morgan = require('morgan');
+const routes = require('./routes');
+const socketio = require('socket.io');
 
 app.use(morgan('dev'));
 
-app.use('/special', function (req, res, next) {
-  console.log(req.method, req.url, 'Special Area');
-  res.send('Not 404');
-  next();
-})
+let server = app.listen(3000);
+let io = socketio.listen(server);
+app.use('/', routes(io));
 
-app.get('/', function (req, res) {
-  res.send('Nothing here.');
+app.set('view engine', 'html');
+app.engine('html', nunjucks.render);
+nunjucks.configure('views', {
+  noCache: true
 });
 
-app.listen(3000, function () {
-  console.log('Listening.');
-});
+
+
+// app.listen(3000, function () {
+//   console.log('Listening.');
+// });
+
