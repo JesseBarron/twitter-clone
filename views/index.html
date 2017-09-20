@@ -26,13 +26,14 @@
       {%endif%}
 
       <!-- display tweets here -->
+      <div id='listParent'>
       {% for tweet in tweets %}
       <div class="tweetbox">
-
         <li> <img> <a href="/users/{{tweet.name}}">{{tweet.name}}</a></li>
         <li>{{tweet.content}}</li>
         </div>
       {% endfor %}
+    </div>
     </div>
   </div>
 

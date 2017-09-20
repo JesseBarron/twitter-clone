@@ -88,13 +88,15 @@
     });
 
     socket.on('newTweet', function (tweet) {
-      alert('Refreshing...check the console...')
-      console.log(tweet)
-      let tweetbox = document.getElementsByClassName('tweetbox');
-      // console.log(tweetbox)
-      // console.log(tweet);
-      // tweetbox.appendChild('<p>TWEET</p>');
-      // socket.broadcast.emit('this', clients)
+      // alert('Refreshing...check the console...')
+      let newEl = document.createElement('DIV');
+      newEl.innerHTML = '<div class = "tweetbox">  <li><img>'+tweet.name+'</li>  <li>'+tweet.text+'</li>  </div>'
+      // console.dir(newEl)
+      let tweetbox = document.getElementById('listParent');
+      tweetbox.appendChild(newEl)
+      // tweetbox.appendChild('<li>yes</li>')
+      // console.dir(tweetbox)
+
     });
   </script>
 

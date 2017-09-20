@@ -4,6 +4,7 @@ module.exports = function (io) {
   const router = express.Router();
   const tweetBank = require('../tweetBank');
   const body_parser = require('body-parser');
+
   router.use(body_parser.urlencoded({
     extended: false
   }));
@@ -35,12 +36,12 @@ module.exports = function (io) {
   router.post('/tweets', function (req, res) {
     let name = req.body.name;
     let text = req.body.text;
+    tweetBank.add(name, text);
+    res.redirect('/');
     io.sockets.emit('newTweet', {
       name: name,
       text: text,
     });
-    tweetBank.add(name, text);
-    res.redirect('/');
   });
 
   return router;
